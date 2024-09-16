@@ -20,7 +20,9 @@ class SineModulation:
 
 kg_to_current = 1.0/1.8
 
-logging = False
+
+log_data_store = []  # List to store logged data
+
 
 current_position = 0
 
@@ -32,6 +34,7 @@ applied_weight_data = [1.0]
 
 
 dpg.create_context()
+
 motor = None
 print("finding an odrive...")
 try:
@@ -78,6 +81,14 @@ def get_set_force():
 def set_force_button():
     set_force_kg(dpg.get_value("kg_input_double"))
 
+def start_recording():
+    global logging 
+    print("Start recording...")
+    if(logging == True): logging = False
+    else: logging = True
+
+logging = False
+
 def update_graphs(time):
     position_data.append(get_current_position())
     applied_weight_data.append(get_current_force())
@@ -100,12 +111,21 @@ def update_graphs(time):
     dpg.fit_axis_data("x_axis")
     dpg.set_axis_limits_auto("x_axis")
 
-def start_recording():
-    print("Start recording...")
-    logging = not logging
-
 def log_data():
-    pass
+    current_time = time.time()
+    pos = get_current_position()
+    set_weight = get_set_force()
+    current_weight = get_current_force()
+
+    # Append data to log
+    log_data_store.append({
+        "time": current_time,
+        "position": pos,
+        "set_weight": set_weight,
+        "current_weight": current_weight
+    })
+    print(f"Logged data: Time={current_time}, Position={pos}, Set Weight={set_weight}, Current Weight={current_weight}")
+
 
 def move_increment_positive():
     increment = dpg.get_value("move_increment")
