@@ -6,7 +6,8 @@ from odrive.enums import *
 import time
 import math
 import numpy as np
-
+import socket
+import subprocess
 
 class SineModulation:
     frequency = 0.0
@@ -111,31 +112,32 @@ def update_graphs(time):
     dpg.fit_axis_data("x_axis")
     dpg.set_axis_limits_auto("x_axis")
 
-def get_local_ip():
-    """
-    Returns the IP address of the current machine on the local network.
-    """
-    # Get the hostname of the local machine
-    hostname = socket.gethostname()
-    # Resolve the hostname to an IP address
-    local_ip = socket.gethostbyname(hostname)
-    return local_ip
+# def get_local_ip():
+#     """
+#     Returns the IP address of the current machine on the local network.
+#     """
+#     # Get the hostname of the local machine
+#     hostname = socket.gethostname()
+#     # Resolve the hostname to an IP address
+#     local_ip = socket.gethostbyname(hostname)
+#     return local_ip
 
-def find_open_port():
-    """
-    Finds an available port by letting the OS assign an open port.
-    """
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as temp_socket:
-        temp_socket.bind(('', 0))  # Bind to any available port
-        open_port = temp_socket.getsockname()[1]
-    return open_port
-
+def create_udp_receiver():
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    try:
+        sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
+    except AttributeError:
+        print("SO_REUSEPORT not supported on this system")
 
 def log_data():
     current_time = time.time()
     pos = get_current_position()
     set_weight = get_set_force()
     current_weight = get_current_force()
+    
+    # Run another script asynchronously
+    subprocess.Popen(["python", "Measure_log.py"])
 
     # Append data to log
     log_data_store.append({
@@ -265,8 +267,17 @@ dpg.create_viewport(title='Custom Title', width=800, height=600)
 dpg.setup_dearpygui()
 dpg.show_viewport()
 
+def find_open_port():
+    """
+    Finds an available port by letting the OS assign an open port.
+    """
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as temp_socket:
+        temp_socket.bind(('', 0))  # Bind to any available port
+        open_port = temp_socket.getsockname()[1]
+    return open_port
 
-host = get_local_ip()
+# host = get_local_ip()
+host = '127.0.0.1'
 RXport = find_open_port()
 TXport = find_open_port()
 
