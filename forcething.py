@@ -84,9 +84,12 @@ def set_force_button():
 
 def start_recording():
     global logging 
-    print("Start recording...")
-    if(logging == True): logging = False
-    else: logging = True
+    if(logging == True): 
+        logging = False
+        print("...recording stopped")
+    else: 
+        logging = True
+        print("Start recording...")
 
 logging = False
 
@@ -138,6 +141,7 @@ def log_data():
     
     # Run another script asynchronously
     subprocess.Popen(["python", "Measure_log.py"])
+    
 
     # Append data to log
     log_data_store.append({
@@ -288,6 +292,7 @@ with open("port_info.txt", "w") as file:
 
 last_time = 0.0
 while(dpg.is_dearpygui_running()):
+    sock.sendto(.encode(), (host, Tx)
 
     current_time = time.time()
     if(current_time > last_time + graph_update_rate) and motor != None:
