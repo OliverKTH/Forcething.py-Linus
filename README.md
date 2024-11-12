@@ -21,8 +21,8 @@ This user-friendly design supports a wide range of exercises, allowing athletes 
 
 ⚙️ **How It Works:**
 
-The system works by utilizing the AC-DC motor to control and measure resistance, speed, and force during exercises. The data is processed in real time and displayed on a screen, allowing the user to track:
-- **Speed** of their movements, crucial for explosive training.
+The system works by utilizing the DC motor to control and measure speed and force during exercises. The data is processed in real time and displayed on a screen, allowing the user to track:
+- **Speed** of their movements, crucial for measuring .
 - **Force** exerted during exercises, key for strength training.
 - **Actual weight lifted** based on motor output, providing a direct alternative to traditional weights.
 
@@ -58,4 +58,4 @@ In the future, *Forcething Speed* can be used at home, outdoors, or in gyms, mak
 - Tekleyohannes Woldai
 - 
 # Forcething.py-Linus
-This code is written by Linus Remahl 
+The base code is written by Linus Remahl, KTH 2023
