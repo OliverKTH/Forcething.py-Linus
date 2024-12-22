@@ -82,12 +82,6 @@ def get_set_force():
 
 def get_current_speed():
     vel = (motor.axis1.encoder.vel_estimate)*(0.03*np.pi*(16.0/85.0))
-    # length=0
-    # if (len(position_data["position"]) > 10):
-    #     vel= (((position_data["position"][10]) - (position_data["position"][0]))/((position_data["time"][10]) - (position_data["time"][0])))
-    # else:
-    #     vel= (((position_data["position"][len(position_data["position"])]) - (position_data["position"][0]))/((position_data["time"][len(position_data["time"])]) - (position_data["time"][0])))
-
     return vel
 
 def set_force_button():
