@@ -131,7 +131,6 @@ with open("data.csv", "a") as f:
 
 def log_data():
     current_time = time.time()
-    # speed_data = get_current_speed_data()
     pos = get_current_position()
     current_weight = get_current_force()
     speed = get_current_speed()
