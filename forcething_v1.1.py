@@ -29,13 +29,13 @@ logging = False
 current_position = 0
 
 graph_update_rate = 1.0/60.0
+sample_update_rate = 1.0/1000.0
 
 position_data = [0.0]
 applied_weight_data = [1.0]
 speed_data = [0.0]
 
-
-
+dpg.set_viewport_vsync(False)
 dpg.create_context()
 motor = None
 print("finding an odrive...")
