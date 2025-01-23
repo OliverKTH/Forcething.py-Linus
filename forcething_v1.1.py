@@ -265,36 +265,41 @@ dpg.create_viewport(title='Custom Title', width=800, height=600)
 dpg.setup_dearpygui()
 dpg.show_viewport()
 
-last_time = 0.0
+last_time1 = 0.0
+last_time2 = 0.0
 while(dpg.is_dearpygui_running()):
 
     current_time = time.time()
-    if(current_time > last_time + graph_update_rate) and motor != None:
+    if(current_time > last_time1 + graph_update_rate) and motor != None:
         update_graphs(current_time)
         update_info(current_time)
-        last_time = current_time
+        last_time1 = current_time
+        
+        sine_frequency = dpg.get_value("sine_frequency")
+        sine_amplitude = (dpg.get_value("sine_max") - dpg.get_value("sine_min"))/2.0
+        sine_offset = dpg.get_value("sine_min") + (sine_amplitude)
+        
+        if dpg.get_value("sine_modulation_time") and motor != None and sine_frequency > 0.00001:
+            sine = SineModulation(sine_frequency, sine_amplitude)
+            set_force_kg(sine.modulate(current_time, sine_offset))
 
-
-
-    sine_frequency = dpg.get_value("sine_frequency")
-    sine_amplitude = (dpg.get_value("sine_max") - dpg.get_value("sine_min"))/2.0
-    sine_offset = dpg.get_value("sine_min") + (sine_amplitude)
-
-    if dpg.get_value("sine_modulation_time") and motor != None and sine_frequency > 0.00001:
-        sine = SineModulation(sine_frequency, sine_amplitude)
-        set_force_kg(sine.modulate(current_time, sine_offset))
-
-    if dpg.get_value("sine_modulation_distance") and motor != None and sine_frequency > 0.00001:
-        sine = SineModulation(sine_frequency, sine_amplitude)
-        set_force_kg(sine.modulate(get_current_position(), sine_offset))
-    
-    if(dpg.get_value("record_sample_rate")):
+        if dpg.get_value("sine_modulation_distance") and motor != None and sine_frequency > 0.00001:
+            sine = SineModulation(sine_frequency, sine_amplitude)
+            set_force_kg(sine.modulate(get_current_position(), sine_offset))
+        
+   
+    if(dpg.get_value("record_sample_rate") and motor != None and sample_update_rate < 1.0):
         sample_update_rate= 1.0/(dpg.get_value("record_sample_rate"))
+    else :
+        sample_update_rate= 1.0/10.0
+    
     current_time = time.time()
-    if(current_time > last_time + sample_update_rate) and motor != None: 
+    if(current_time > last_time2 + sample_update_rate) and motor != None: 
+        last_time2 = current_time
         if logging:
             log_data()
             speed_data.append(get_current_speed())
+        
 
     if(motor == None):
         try:
