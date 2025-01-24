@@ -126,16 +126,16 @@ def start_recording():
         logging = bool(False)
 
 
-with open("data.csv", "a") as f:
-    f.write("TIME;POSITION;WEIGHT;SPEED\n")
+logfile = open("data.csv", "a")
+logfile.write("TIME;POSITION;WEIGHT;SPEED\n")
 
 def log_data():
     current_time = time.time()
     pos = get_current_position()
     current_weight = get_current_force()
     speed = get_current_speed()
-    with open("data.csv", "a") as f:
-        f.write(f"{current_time};{pos};{current_weight};{speed}\n")
+    logfile.write(f"{current_time};{pos};{current_weight};{speed}\n")
+    logfile.flush()
 
 def move_increment_positive():
     increment = dpg.get_value("move_increment")
@@ -308,4 +308,4 @@ while(dpg.is_dearpygui_running()):
             pass
     dpg.render_dearpygui_frame()   
 dpg.destroy_context()
-f.close()
+logfile.close()
