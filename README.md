@@ -61,7 +61,7 @@ In the future, *Forcething Speed* can be used at home, outdoors, or in gyms, mak
 - Oliver Yvling-Lind
 - Christian Benjamin  
 - Tekleyohannes Woldai
-- 
+
 # Forcething.py-Linus
 The base code is written by Linus Remahl, KTH 2023
 Expanded on by Oliver Yvlig-Lind, KTH 2024
