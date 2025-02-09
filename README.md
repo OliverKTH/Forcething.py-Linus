@@ -16,6 +16,11 @@ The *Forcething Speed* system is designed with simplicity and functionality in m
 - **Compact design** that eliminates the need for large or expensive training equipment, making it ideal for versatile use in various exercises, from weight lifting to sprint training.
 
 This user-friendly design supports a wide range of exercises, allowing athletes to focus on maximizing their performance.
+The design of the motor housing in the CAD files are based on a housing for the Odrive-D6374 dual shaft motor that uses an CUI AMT102 type encoder bolted to the housing.
+
+Housing design:
+![image](https://github.com/user-attachments/assets/d8bd47c0-d7f1-44fc-a892-fbd306d896d6)
+![image](https://github.com/user-attachments/assets/fef296a5-1909-4d9c-8522-18415cc3e8e9)
 
 ---
 
