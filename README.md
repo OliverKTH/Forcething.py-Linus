@@ -41,8 +41,10 @@ Initial testing of *Forcething Speed* focused on making sure the program accurat
 
 To further improve the device, an external battery is planned to ensure a stable power supply, enhancing portability and ease of use.
 
-Video:
+Video of the program showing one of the :
 
+
+https://github.com/user-attachments/assets/c6867d11-1b70-4083-b0c4-e8e16fb2fa6f
 
 ---
 
