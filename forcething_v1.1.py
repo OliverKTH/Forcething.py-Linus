@@ -35,7 +35,7 @@ position_data = [0.0]
 applied_weight_data = [1.0]
 speed_data = [0.0]
 
-dpg.set_viewport_vsync(False)
+#dpg.set_viewport_vsync(False)
 dpg.create_context()
 motor = None
 print("finding an odrive...")
