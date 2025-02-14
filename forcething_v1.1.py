@@ -83,7 +83,7 @@ def get_set_force():
     return motor.axis1.motor.config.current_lim / kg_to_current
 
 def get_current_speed():
-    vel = (motor.axis1.encoder.vel_estimate)*(0.03*np.pi*(16.0/85.0))
+    vel = (motor.axis1.encoder.vel_estimate)*(0.03*np.pi*(85.0/16.0))
     return vel
 
 def set_force_button():
