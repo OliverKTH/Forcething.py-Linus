@@ -28,6 +28,8 @@ logging = False
 
 current_position = 0
 
+reference_time = time.time()
+
 graph_update_rate = 1.0/60.0
 sample_update_rate = 1.0/1000.0
 
@@ -130,7 +132,7 @@ logfile = open("data.csv", "a")
 logfile.write("TIME;POSITION;WEIGHT;SPEED\n")
 
 def log_data():
-    current_time = time.time()
+    current_time = (time.time()) - reference_time
     pos = get_current_position()
     current_weight = get_current_force()
     speed = get_current_speed()
